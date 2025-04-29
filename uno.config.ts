@@ -1,5 +1,5 @@
-import presetWind4 from '@unocss/preset-wind4'
-import { presetAttributify, presetWebFonts, presetIcons, presetTypography, defineConfig } from 'unocss'
+import presetWind4 from '@unocss/preset-wind4';
+import { presetAttributify, presetWebFonts, presetIcons, presetTypography, defineConfig } from 'unocss';
 
 export default defineConfig({
   presets: [
@@ -9,8 +9,8 @@ export default defineConfig({
     presetWebFonts(),
     presetIcons({
       collections: {
-        lucide: () => import('@iconify-json/lucide/icons.json').then(icon => icon.default)
-      }
+        lucide: () => import('@iconify-json/lucide/icons.json').then(icon => icon.default),
+      },
     }),
-  ]
-})
+  ],
+});
