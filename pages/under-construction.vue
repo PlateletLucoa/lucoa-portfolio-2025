@@ -1,78 +1,38 @@
 <script setup lang="ts">
-// const zenlessTvCanvas = useTemplateRef('zenless-tv-canvas');
-// const zenlessTvImg = useTemplateRef('zenless-tv-img');
+import type { ContainerEvents } from 'vue3-pixi';
 
-onMounted(() => {
-  // if (zenlessTvCanvas.value && zenlessTvImg.value) {
-  //   const context = zenlessTvCanvas.value.getContext('2d');
-
-  //   if (context) {
-  //     context.drawImage(zenlessTvImg.value, 0, 0);
-  //     context.beginPath();
-  //     context.rect(188, 50, 200, 100);
-  //     context.fillStyle = 'yellow';
-  //     context.fill();
-  //     context.lineWidth = 7;
-  //     context.strokeStyle = 'black';
-  //     context.stroke();
-  //   }
-
-  // context?.fillRect(45, 45, 100, 100);
-  // }
-});
+function onContainerAddedToStage(el: ContainerEvents['added'][0]) {
+  el.position.set(el.width / 2, el.height / 1.455);
+  el.pivot.set(el.width / 2, el.height / 1.455);
+}
 </script>
 
 <template>
-  <!-- <div
-    class="bg-black"
-    h="screen"
-    w="screen"
-    overflow="hidden"
-  >
-    <div class="flex flex-1 items-center">
-      <div class="under-construction__image-container">
-        <img
-          src="/zenless-title-screen-centered_optimized.png"
-          alt="Vintage TV in cozy apartment"
-        >
-      </div>
-    </div>
-  </div> -->
-  <!-- <div
-    class="bg-black"
-    h="screen"
-    w="screen"
-  >
-    <div
-      class="canvas-container"
-      relative
-      flex
-      justify="center"
-      items="end"
-      overflow="hidden"
-    >
-      <canvas
-        ref="zenless-tv-canvas"
-        class="relative w-full"
-        width="2710"
-        height="1288"
-      />
-      <div style="display: none;">
-        <img
-          ref="zenless-tv-img"
-          src="/zenless-title-screen-centered_optimized.png"
-        >
-      </div>
-    </div>
-  </div> -->
   <Application
     :width="2710"
     :height="1288"
     :background-alpha="0"
   >
-    <Loader :resources="['/zenless-title-screen-centered_optimized.png']">
-      <Sprite texture="/zenless-title-screen-centered_optimized.png" />
-    </Loader>
+    <Container @added="onContainerAddedToStage">
+      <Loader
+        :resources="[
+          ['room', '/zenless-title-screen-centered_optimized.png'],
+          ['display', '/zenless-tv-display.png'],
+        ]"
+      >
+        <Sprite
+          texture="room"
+        />
+        <Sprite
+          texture="display"
+          :width="1046"
+          :height="767"
+          :alpha="1"
+          :position-x="(2710 / 2) - (1046 / 2)"
+          :position-y="(1288 / 1.455) - (767 / 2)"
+        />
+      </Loader>
+    </Container>
   </Application>
 </template>
 
