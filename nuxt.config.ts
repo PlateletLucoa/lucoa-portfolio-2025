@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@unocss/nuxt',
+    '@vueuse/nuxt',
     'vue3-pixi-nuxt',
   ],
   devtools: { enabled: true },
